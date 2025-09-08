@@ -70,23 +70,6 @@ func main() {
 		}
 		_ = utils.StoreCreateEventSqlite(db, event)
 	}
-
-	// Aggregate costs per user and resource
-	userResources, err := utils.GetUserResourcesSqlite(db)
-	utils.Err("error getting user resources: %v", err)
-
-	result := make(map[string]map[string]float64)
-	for user, resources := range userResources {
-		costs, err := utils.GetResourceCosts(cfg, resources)
-		if err != nil {
-			continue
-		}
-		result[user] = costs
-	}
-
-	out, err := json.MarshalIndent(result, "", "  ")
-	utils.Err("error marshalling result: %s", err)
-	fmt.Println(string(out))
 }
 
 var events = []string{
