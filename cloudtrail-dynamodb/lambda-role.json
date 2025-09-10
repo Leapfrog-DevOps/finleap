@@ -1,0 +1,46 @@
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Sid": "AllowS3",
+			"Effect": "Allow",
+			"Action": [
+				"s3:GetObject"
+			],
+			"Resource": [
+				"<S3_BUCKET_ARN>/*"
+			]
+		},
+		{
+			"Sid": "AllowDynamoDBPut",
+			"Effect": "Allow",
+			"Action": [
+				"dynamodb:GetItem"
+			],
+			"Resource": [
+				"<DYNAMODB_TABLE_ARN>"
+			]
+		},
+		{
+			"Sid": "AllowKMSKey",
+			"Effect": "Allow",
+			"Action": [
+				"kms:Decrypt",
+				"kms:DescribeKey"
+			],
+			"Resource": [
+				"<KMS_KEY_ARN>"
+			]
+		},
+
+			"Sid": "ReadCloudtrail",
+			"Effect": "Allow",
+			"Action": [
+				"cloudtrail:LookupEvents"
+			],
+			"Resource": [
+				"*"
+			]
+		}
+	]
+}
